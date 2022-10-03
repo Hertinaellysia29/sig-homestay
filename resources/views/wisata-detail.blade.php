@@ -3,12 +3,14 @@
 
 @section('container')
   
-  <div class="container">
+  <div class="container mt-3">
     <div class="row justify-content-center">
       <div class="col-md-12">
-        <h1 class="mb-4">Wisata {{$data->nama}}</h1>
-        <img src="https://source.unsplash.com/1200x400?tour" alt="">
-        <article class="my-3 fs-5 mb-5">
+        <div style="max-height: 350px; overflow:hidden" class="text-center mb-5">
+          <img src="{{ asset('storage/'. $data->foto) }}" alt="" class="img-fluid">
+        </div>
+        <h2 class="mb-4">Wisata {{$data->nama}}</h2>
+        <article class="my-3 mb-5">
           {!! $data["deskripsi"] !!}
           <i class="bi bi-pin-map"></i> Lokasi wisata di desa {{$data->desa->nama}}, {{$data->lokasi}}
         </article>

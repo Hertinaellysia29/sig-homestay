@@ -3,6 +3,10 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\DashboardWisataController;
+use App\Http\Controllers\AdminDesaController;
+use App\Http\Controllers\DashboardHomestayController;
+use App\Http\Controllers\HalamanUtamaController;
 use App\Http\Controllers\Wisata as ControllersWisata;
 
 /*
@@ -37,12 +41,14 @@ Route::get('/peta', function () {
     ]);
 });
 
-Route::get('/homestay', function () {
-    return view('homestay', [
-        'title' => 'Homestay',
-        'active' => 'homestay'
-    ]);
-});
+// Route::get('/homestay', function () {
+//     return view('homestay', [
+//         'title' => 'Homestay',
+//         'active' => 'homestay'
+//     ]);
+// });
+Route::get('/homestay', [HalamanUtamaController::class, 'homestay']);
+Route::get('/homestay/{id}', [HalamanUtamaController::class, 'homestayDetail']);
 
 Route::get('/wisata', [ControllersWisata::class, 'index']);
 Route::get('/wisata/{id}', [ControllersWisata::class, 'detailWisata']);
@@ -54,5 +60,18 @@ Route::get('/hubungi-kami', function () {
     ]);
 });
 
-Route::get('/login', [LoginController::class, 'index']);
-Route::get('/register', [RegisterController::class, 'index']);
+Route::get('/login', [LoginController::class, 'index'])->name('login')->middleware('guest');
+Route::post('/login', [LoginController::class, 'login']);
+Route::post('/logout', [LoginController::class, 'logout']);
+Route::get('/register', [RegisterController::class, 'index'])->middleware('guest');
+Route::post('/register', [RegisterController::class, 'register']);
+
+Route::get('/dashboard', function () {
+    return view('dashboard.index');
+});
+
+Route::resource('/dashboard/wisata', DashboardWisataController::class)->middleware('auth');
+
+Route::resource('/dashboard/desa', AdminDesaController::class)->except('show')->middleware('admin');
+
+Route::resource('/dashboard/homestay', DashboardHomestayController::class)->middleware('auth');
