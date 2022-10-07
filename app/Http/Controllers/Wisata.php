@@ -23,4 +23,10 @@ class Wisata extends Controller
             "active" => 'wisata'
         ]);
     }
+
+    public function wisataJson()
+    {   
+        $wisata = ModelsWisata::all();
+        return json_encode($wisata);
+    }
 }

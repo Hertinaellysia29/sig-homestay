@@ -2,8 +2,8 @@
 @extends('layouts.main')
 
 @section('container')
-  <div class="container">
-    <h1 class="mb-5 mt-5">Wisata</h1>
+  <div class="container" style="padding-top: 50px">
+    <h1 class="mb mt-5 line-title">Wisata</h1>
     <div class="row">
       @foreach ($datas as $data)
       

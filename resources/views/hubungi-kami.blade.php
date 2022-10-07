@@ -1,7 +1,7 @@
 @extends('layouts.main')
 
 @section('container')
-  <section class="py-5 text-center container">
+  <section class="py-5 text-center container mt-5" style="padding-top: 50px">
     <div class="row py-lg-5">
       <div class="col-lg-6 col-md-8 mx-auto">
         <h1 class="fw-light mb-3">HUBUNGI KAMI</h1>
@@ -12,8 +12,8 @@
         </p>
         <div class="mt-5">
           <h2 class="fw-light mb-3">Kontak Kami</h2>
-          <div class="fs-5 mb-2"><i class="bi bi-telephone-fill" style="color: #0d6efd"></i> &nbsp;&nbsp; 081323234239</div>
-          <div class="fs-5"><i class="bi bi-envelope-fill" style="color: #0d6efd"></i> &nbsp;&nbsp; hertina@gmail.com</div>
+          <div class="fs-5 mb-2"><i class="bi bi-telephone-fill" style="color: #e1473e"></i> &nbsp;&nbsp; 081323234239</div>
+          <div class="fs-5"><i class="bi bi-envelope-fill" style="color: #e1473e"></i> &nbsp;&nbsp; hertina@gmail.com</div>
         </div>
       </div>
     </div>
