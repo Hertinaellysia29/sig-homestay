@@ -21,6 +21,9 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.1/dist/leaflet.css" integrity="sha256-sA+zWATbFveLLNqWO2gtiw3HL/lh1giY/Inf1BJ0z14=" crossorigin=""/>
     <script src="https://unpkg.com/leaflet@1.9.1/dist/leaflet.js" integrity="sha256-NDI0K41gVbWqfkkaHj15IzU7PtMoelkzyKp8TOaFQ3s=" crossorigin=""></script>
 
+    {{-- JQuery --}}
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+
     <style>
       #map { height: 180px; }
       .leaflet-container {
@@ -29,6 +32,52 @@
 			max-width: 100%;
 			max-height: 100%;
 		}
+    .image {
+      height: 100vh;
+      min-height: 500px;
+      background-image: url('https://learn.g2.com/hubfs/Stock%20images/Image%20of%20a%20light%20blue%20world%20map-1.jpeg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      opacity: 0.8;
+    }
+    .image:after {
+      content: '';
+      display: block;
+      position: absolute;
+      z-index: 2;
+    }
+
+    .hero { 
+        position: relative; 
+        height: 100vh;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-image: url('/storage/20945925.jpg');
+        background-size: cover;
+        background-repeat: no-repeat;
+    }
+
+    .hero::before {
+        content: "";
+        position: absolute;
+        top: 0px;
+        right: 0px;
+        bottom: 0px;
+        left: 0px;
+        /* background-color: rgb(66 150 211 / 34%); */
+    }
+
+    .header-text {
+    position: relative;
+    color: #5b0126;  
+    font-size: 4rem;
+    line-height: 0.9;
+    text-align: center;
+  }
+
     </style>
 
     <title>SIG | {{$title}}</title>
@@ -37,7 +86,7 @@
 
     @include('partials.navbar')
 
-    <div class="mt-4 flex-column min-vh-100">
+    <div class="flex-column min-vh-100">
         @yield('container')
     </div>
 

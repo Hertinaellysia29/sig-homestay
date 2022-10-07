@@ -48,9 +48,11 @@ Route::get('/peta', function () {
 //     ]);
 // });
 Route::get('/homestay', [HalamanUtamaController::class, 'homestay']);
+Route::get('/homestay/json', [HalamanUtamaController::class, 'homestayJson']);
 Route::get('/homestay/{id}', [HalamanUtamaController::class, 'homestayDetail']);
 
 Route::get('/wisata', [ControllersWisata::class, 'index']);
+Route::get('/wisata/json', [ControllersWisata::class, 'wisataJson']);
 Route::get('/wisata/{id}', [ControllersWisata::class, 'detailWisata']);
 
 Route::get('/hubungi-kami', function () {

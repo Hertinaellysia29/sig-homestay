@@ -2,7 +2,7 @@
 
 @section('container')
 <div class="container">
-    <div class="row justify-content-center mt-5 container">
+    <div class="row justify-content-center mt-5 container" style="padding-top: 50px">
         <div class="col-lg-5">
             <main class="form-registration">
                 <h1 class="h3 mb-3 fw-normal text-center mb-5">Registrasi Pemilik Homestay</h1>

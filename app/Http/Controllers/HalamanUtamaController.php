@@ -16,6 +16,12 @@ class HalamanUtamaController extends Controller
         ]);
     }
 
+    public function homestayJson()
+    {   
+        $homestay = Homestay::all();
+        return json_encode($homestay);
+    }
+
     public function homestayDetail($id)
     {   
         return view('homestay-detail', [
