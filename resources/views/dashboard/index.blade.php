@@ -4,7 +4,7 @@
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
         <h1 class="h2"> Welcome back, {{ auth()->user()->name }}</h1>
     </div>
-
+    @if (auth()->user()->role == 'admin')
     <div class="row mt-4">
         <div class="col-sm-3">
         <div class="card bg-danger text-white">
@@ -43,6 +43,7 @@
             </div>
         </div>
     </div>
+    @endif  
 
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 mt-5 border-bottom">
         <h3 class="h3"> Peta Homestay </h3>
