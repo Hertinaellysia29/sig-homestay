@@ -53,6 +53,7 @@ Route::get('/homestay/{id}', [HalamanUtamaController::class, 'homestayDetail']);
 
 Route::get('/wisata', [ControllersWisata::class, 'index']);
 Route::get('/wisata/json', [ControllersWisata::class, 'wisataJson']);
+Route::get('/wisata/detail/json/{id}', [HalamanUtamaController::class, 'getWisataJson']);
 Route::get('/wisata/{id}', [ControllersWisata::class, 'detailWisata']);
 
 Route::get('/hubungi-kami', function () {

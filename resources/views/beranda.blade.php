@@ -148,23 +148,14 @@
 
   // TODO KALO PILIHAN NYA WISATA, BUAT ICON WISATA DAN SET ITU SEBAGAI CENTER NYA
 
-  function initMap(it){
+  function initMap(){
+
     // Start fresh
     cities.clearLayers();
 
     $.getJSON('homestay/json', function(data){
       console.log( "ready!" );
       var marker, popupContent;
-      // if (navigator.geolocation) {
-      //   navigator.geolocation.getCurrentPosition(function(position){
-      //     //   alert("Latitude: " + position.coords.latitude + 
-      //     // "<br>Longitude: " + position.coords.longitude);
-      //     var myLocation = L.marker([position.coords.latitude,position.coords.longitude], {icon: myLocationIcon}).bindPopup('My Location').addTo(cities);
-      //     bounds.extend([position.coords.latitude, position.coords.longitude]);
-      //   });
-      //   } else { 
-      //     alert("Geolocation is not supported by this browser.");
-      //   }
       $.each(data, function(index){
         var arr = data[index].koordinat_lokasi.split(',');
         marker = L.marker([arr[0],arr[1]], {icon: greenIcon}).addTo(cities);
@@ -181,9 +172,6 @@
       </div>`);
           
        bounds.extend([arr[0],arr[1]]);
-       if (it == index + 1) {
-          return false;
-        } 
       });
       
       setTimeout(function () {
@@ -193,47 +181,68 @@
     });
   }
 
-  initMap(3);
+  initMap();
 
   // form source map
   $('#source2').on('change', function() {
       var val = $(this).val();
       var opt = val.split('-');
       if (opt[0] == 'wisata'){
-        initMap(2);
+        // Start fresh
+        var newBounds = L.latLngBounds()
+
+        cities.clearLayers();
+
+        $.getJSON('wisata/detail/json/'+opt[1]+'', function(data){
+          var marker, popupContent;
+          var arr = data.koordinat_lokasi.split(',');
+          wisataMarker = L.marker([arr[0],arr[1]], {icon: myLocationIcon}).addTo(cities);
+          var deskripsi = data.deskripsi
+          var trimmedString = deskripsi.substr(0, 10);
+          trimmedString = trimmedString.substr(0, Math.min(trimmedString.length, trimmedString.lastIndexOf(" ")))
+          wisataMarker.bindPopup(`<div class="card" style="width: 18rem;border:0px;">
+          <img src="storage/`+data.foto+`" class="card-img-top" alt="...">
+          <div class="card-body">
+            <h5 class="card-title">`+data.nama+`</h5>
+            <p class="card-text">`+trim_words(stripHtml(deskripsi), 15)+`...</p>
+            <a href="/wisata/`+data.id+`" class="btn btn-outline-primary">Lihat Detail</a>
+          </div>
+          </div>`);
+          
+          newBounds.extend([arr[0],arr[1]]);
+        });
+
+        $.getJSON('homestay/json', function(data){
+          console.log( "ready!" );
+          var marker, popupContent;
+          $.each(data, function(index){
+            var arr = data[index].koordinat_lokasi.split(',');
+            marker = L.marker([arr[0],arr[1]], {icon: greenIcon}).addTo(cities);
+            var deskripsi = data[index].deskripsi
+            var trimmedString = deskripsi.substr(0, 10);
+            trimmedString = trimmedString.substr(0, Math.min(trimmedString.length, trimmedString.lastIndexOf(" ")))
+            marker.bindPopup(`<div class="card" style="width: 18rem;border:0px;">
+            <img src="storage/`+data[index].foto+`" class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title">`+data[index].nama+`</h5>
+              <p class="card-text">`+trim_words(stripHtml(deskripsi), 15)+`...</p>
+              <a href="/homestay/`+data[index].id+`" class="btn btn-outline-primary">Lihat Detail</a>
+            </div>
+          </div>`);
+              
+          // newBounds.extend([arr[0],arr[1]]);
+          });
+          
+          setTimeout(function () {
+            map.fitBounds(newBounds);
+          }, 1000);
+
+        });
+
       }
       if (opt[0] == 'jarak'){
         alert(opt[1]);
       }
-      // if(source === 'wisata') {
-      //     $.ajax({
-      //         url: '/wisata/json',
-      //         type: "GET",
-      //         data : {"_token":"{{ csrf_token() }}"},
-      //         dataType: "json",
-      //         success:function(data)
-      //         {
-      //           if(data){
-      //               $('#source2').empty();
-      //               $('#source2').append('<option hidden>Pilih Wisata</option>'); 
-      //               $.each(data, function(key, wisata){
-      //                   $('select[name="source2"]').append('<option value="wisata-'+ wisata.id +'">' + wisata.nama+ '</option>');
-      //               });
-      //           }else{
-      //               $('#source2').empty();
-      //           }
-      //         }
-      //     });
-      // }else{
-      //   $('#source2').empty();
-      //   $('#source2').append('<option hidden>Pilih Jarak</option>'); 
-      //     $('select[name="source2"]').append('<option value="jarak-1">1KM</option>');
-      //     $('select[name="source2"]').append('<option value="jarak-3">3KM</option>');
-      //     $('select[name="source2"]').append('<option value="jarak-5">5KM</option>');
-      //     $('select[name="source2"]').append('<option value="jarak-8">8KM</option>');
-      //     $('select[name="source2"]').append('<option value="jarak-10">10KM</option>');
-      //     $('select[name="source2"]').append('<option value="jarak-semua">Semua</option>');
-      // }
   });
 
   $( document ).ready(function() {
