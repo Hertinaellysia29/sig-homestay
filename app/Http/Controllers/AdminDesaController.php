@@ -45,7 +45,7 @@ class AdminDesaController extends Controller
 
         Desa::create($validatedData);
 
-        return redirect('/dashboard/desa')->with('success', 'Add Desa successfull!');
+        return redirect('/dashboard/desa')->with('success', 'Tambah Nama Desa berhasil!');
     }
 
     /**
@@ -89,7 +89,20 @@ class AdminDesaController extends Controller
         Desa::where('id', $id)
             ->update($validatedData);
 
-        return redirect('/dashboard/desa')->with('success', 'Desa has been updated!');
+        return redirect('/dashboard/desa')->with('success', 'Edit Nama Desa berhasil!');
+    }
+
+    public function editDesa(Request $request, $id)
+    {   
+        return $request;
+        $validatedData = $request->validate([
+            'nama' => 'required|max:255'
+        ]);
+
+        Desa::where('id', $id)
+            ->update($validatedData);
+
+        return redirect('/dashboard/desa')->with('success', 'Edit Nama Desa berhasil!');
     }
 
     /**
@@ -101,6 +114,6 @@ class AdminDesaController extends Controller
     public function destroy($id)
     {
         Desa::destroy($id);
-        return redirect('/dashboard/desa')->with('success', 'Desa has been deleted!');
+        return redirect('/dashboard/desa')->with('success', 'Hapus Nama Desa berhasil!');
     }
 }

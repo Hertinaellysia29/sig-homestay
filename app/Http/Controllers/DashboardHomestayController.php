@@ -71,7 +71,7 @@ class DashboardHomestayController extends Controller
 
         Homestay::create($validatedData);
 
-        return redirect('/dashboard/homestay')->with('success', 'Add Homestay successfull!');
+        return redirect('/dashboard/homestay')->with('success', 'Tambah Homestay berhasil!');
     }
 
     /**
@@ -138,7 +138,7 @@ class DashboardHomestayController extends Controller
         Homestay::where('id', $id)
             ->update($validatedData);
 
-        return redirect('/dashboard/homestay')->with('success', 'Homestay has been updated!');
+        return redirect('/dashboard/homestay')->with('success', 'Edit Homestay berhasil!');
     }
 
     /**
@@ -154,6 +154,16 @@ class DashboardHomestayController extends Controller
             Storage::delete($data->foto);
         }
         Homestay::destroy($id);
-        return redirect('/dashboard/homestay')->with('success', 'Homestay has been deleted!');
+        return redirect('/dashboard/homestay')->with('success', 'Hapus Homestay berhasil!');
+    }
+
+    public function homestayJson()
+    {
+        if (auth()->user()->role !== 'admin') {
+            $homestay = Homestay::where('user_id', auth()->user()->id)->get();
+            return json_encode($homestay);
+        }
+        $homestay = Homestay::all();
+        return json_encode($homestay);
     }
 }

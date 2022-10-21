@@ -54,11 +54,11 @@
               <ul>
                 <li>
                   <i class="bx bx-chevron-right"></i>
-                  <a href="/login">Login</a>
+                  <a href="/login">Masuk</a>
                 </li>
                 <li>
                   <i class="bx bx-chevron-right"></i>
-                  <a href="/register">Register</a>
+                  <a href="/register">Daftar</a>
                 </li>
               </ul>
             </div>

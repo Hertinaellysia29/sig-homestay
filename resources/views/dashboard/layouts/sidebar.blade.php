@@ -66,9 +66,9 @@
           </li>
 
           <li class="nav-item">
-            <a class="nav-link {{ Request::is('dashboard/user*') ? 'active' : '' }}" href="/dashboard/user">
+            <a class="nav-link {{ Request::is('dashboard/pemilik-homestay*') ? 'active' : '' }}" href="/dashboard/pemilik-homestay">
               <span data-feather="user"></span>
-              Profile
+              Akun
             </a>
           </li>
         </ul>

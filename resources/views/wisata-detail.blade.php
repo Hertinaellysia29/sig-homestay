@@ -12,6 +12,7 @@
         <h2 class="mb-4">{{$data->nama}}</h2>
         <article class="my-3 mb-5">
           {!! $data["deskripsi"] !!}
+          <br>
           <i class="bi bi-pin-map"></i> Lokasi wisata di desa {{$data->desa->nama}}, {{$data->lokasi}}
         </article>
       </div>

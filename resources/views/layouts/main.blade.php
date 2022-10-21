@@ -21,8 +21,8 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.1/dist/leaflet.css" integrity="sha256-sA+zWATbFveLLNqWO2gtiw3HL/lh1giY/Inf1BJ0z14=" crossorigin=""/>
     <script src="https://unpkg.com/leaflet@1.9.1/dist/leaflet.js" integrity="sha256-NDI0K41gVbWqfkkaHj15IzU7PtMoelkzyKp8TOaFQ3s=" crossorigin=""></script>
 
-    {{-- JQuery --}}
-    <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+    {{-- JQuery
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script> --}}
 
     <style>
       #map { height: 180px; }
