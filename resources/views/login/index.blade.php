@@ -20,7 +20,7 @@
             @endif
 
             <main class="form-login">
-                <h1 class="h3 mb-3 fw-normal text-center mb-5">Please Login</h1>
+                <h1 class="h3 mb-3 fw-normal text-center mb-5">Masuk</h1>
                 <form action="/login" method="post">
                     @csrf
                 <div class="form-floating">
@@ -31,10 +31,10 @@
                     <input type="password" name="password" class="form-control rounded-bottom" id="password" placeholder="Password" required>
                     <label for="password">Password</label>
                 </div>
-                <button class="w-100 btn btn-lg btn-primary mt-4" type="submit">Login</button>
+                <button class="w-100 btn btn-lg btn-primary mt-4" type="submit">Masuk</button>
                 </form>
 
-                <small class="d-block text-center mt-3">Not registered? <a href="/register">Register Now!</a></small>
+                <small class="d-block text-center mt-3">Belum punya akun? <a href="/register">Daftar sekarang!</a></small>
             </main>
         </div>
     </div>

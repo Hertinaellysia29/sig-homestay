@@ -48,4 +48,8 @@ class User extends Authenticatable
     public function wisata(){
         return $this->hasMany(Wisata::class);
     }
+
+    public function pemilik_homestay(){
+        return $this->hasOne(PemilikHomestay::class);
+    }
 }

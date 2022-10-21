@@ -54,7 +54,9 @@
         </div>
       </form>
     </div>
-    <div class="mt-5" id="map" style="width: 100%; height: 600px;"></div>
+    <div class="container-fluid justify-content-center">
+      <div class="mt-5" id="map" style="width: 100%; height: 600px;"></div>
+    </div>
   </div>
 </section>
 
@@ -86,10 +88,10 @@
         $('#source2').empty();
         $('#source2').append('<option hidden>Pilih Jarak</option>'); 
           $('select[name="source2"]').append('<option value="jarak-1">1KM</option>');
+          $('select[name="source2"]').append('<option value="jarak-2">2KM</option>');
           $('select[name="source2"]').append('<option value="jarak-3">3KM</option>');
+          $('select[name="source2"]').append('<option value="jarak-4">4KM</option>');
           $('select[name="source2"]').append('<option value="jarak-5">5KM</option>');
-          $('select[name="source2"]').append('<option value="jarak-8">8KM</option>');
-          $('select[name="source2"]').append('<option value="jarak-10">10KM</option>');
           $('select[name="source2"]').append('<option value="jarak-semua">Semua</option>');
       }
   });
@@ -126,20 +128,35 @@
   var satellite = L.tileLayer(mbUrl, {id: 'mapbox/satellite-v9', tileSize: 512, zoomOffset: -1, attribution: mbAttr});
   layerControl.addBaseLayer(satellite, 'Satellite');
 
-  var greenIcon = L.icon({
-      iconUrl: '/storage/placeholder.png',
+  var homestayIcon = L.icon({
+      iconUrl: '/storage/home-icon.png',
       shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
-      iconSize:     [60, 75], // size of the icon
+      iconSize:     [60, 70], // size of the icon
+      shadowSize:   [37, 43], // size of the shadow
+      iconAnchor:   [22, 94], // point of the icon which will correspond to marker's location
+      shadowAnchor: [4, 62],  // the same for the shadow
+      popupAnchor:  [8, -85] // point from which the popup should open relative to the iconAnchor
+      // iconSize:     [38, 95], // size of the icon
+      // shadowSize:   [50, 64], // size of the shadow
+      // iconAnchor:   [22, 94], // point of the icon which will correspond to marker's location
+      // shadowAnchor: [4, 62],  // the same for the shadow
+      // popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+  });
+
+  var userIcon = L.icon({
+      iconUrl: '/storage/user-location.png',
+      shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+      iconSize:     [55, 75], // size of the icon
       shadowSize:   [37, 43], // size of the shadow
       iconAnchor:   [22, 94], // point of the icon which will correspond to marker's location
       shadowAnchor: [4, 62],  // the same for the shadow
       popupAnchor:  [8, -85] // point from which the popup should open relative to the iconAnchor
   });
 
-  var myLocationIcon = L.icon({
-      iconUrl: '/storage/home-address.png',
+  var wisataIcon = L.icon({
+      iconUrl: '/storage/icon-wisata.png',
       shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
-      iconSize:     [60, 75], // size of the icon
+      iconSize:     [55, 75], // size of the icon
       shadowSize:   [37, 43], // size of the shadow
       iconAnchor:   [22, 94], // point of the icon which will correspond to marker's location
       shadowAnchor: [4, 62],  // the same for the shadow
@@ -158,7 +175,7 @@
       var marker, popupContent;
       $.each(data, function(index){
         var arr = data[index].koordinat_lokasi.split(',');
-        marker = L.marker([arr[0],arr[1]], {icon: greenIcon}).addTo(cities);
+        marker = L.marker([arr[0],arr[1]], {icon: homestayIcon}).addTo(cities);
         var deskripsi = data[index].deskripsi
         var trimmedString = deskripsi.substr(0, 10);
         trimmedString = trimmedString.substr(0, Math.min(trimmedString.length, trimmedString.lastIndexOf(" ")))
@@ -188,6 +205,7 @@
       var val = $(this).val();
       var opt = val.split('-');
       if (opt[0] == 'wisata'){
+        var originLatLong = "";
         // Start fresh
         var newBounds = L.latLngBounds()
 
@@ -196,7 +214,7 @@
         $.getJSON('wisata/detail/json/'+opt[1]+'', function(data){
           var marker, popupContent;
           var arr = data.koordinat_lokasi.split(',');
-          wisataMarker = L.marker([arr[0],arr[1]], {icon: myLocationIcon}).addTo(cities);
+          wisataMarker = L.marker([arr[0],arr[1]], {icon: wisataIcon}).addTo(cities);
           var deskripsi = data.deskripsi
           var trimmedString = deskripsi.substr(0, 10);
           trimmedString = trimmedString.substr(0, Math.min(trimmedString.length, trimmedString.lastIndexOf(" ")))
@@ -208,7 +226,9 @@
             <a href="/wisata/`+data.id+`" class="btn btn-outline-primary">Lihat Detail</a>
           </div>
           </div>`);
-          
+
+          originLatLong = data.koordinat_lokasi;
+
           newBounds.extend([arr[0],arr[1]]);
         });
 
@@ -217,7 +237,7 @@
           var marker, popupContent;
           $.each(data, function(index){
             var arr = data[index].koordinat_lokasi.split(',');
-            marker = L.marker([arr[0],arr[1]], {icon: greenIcon}).addTo(cities);
+            marker = L.marker([arr[0],arr[1]], {icon: homestayIcon}).addTo(cities);
             var deskripsi = data[index].deskripsi
             var trimmedString = deskripsi.substr(0, 10);
             trimmedString = trimmedString.substr(0, Math.min(trimmedString.length, trimmedString.lastIndexOf(" ")))
@@ -227,6 +247,7 @@
               <h5 class="card-title">`+data[index].nama+`</h5>
               <p class="card-text">`+trim_words(stripHtml(deskripsi), 15)+`...</p>
               <a href="/homestay/`+data[index].id+`" class="btn btn-outline-primary">Lihat Detail</a>
+              <a href="https://www.google.com/maps/dir/?api=1&origin=`+originLatLong+`&destination=`+data[index].koordinat_lokasi+`" class="btn btn-outline-primary" target="_blank">Rute</a>
             </div>
           </div>`);
               
@@ -241,50 +262,69 @@
 
       }
       if (opt[0] == 'jarak'){
-        alert(opt[1]);
+        function getLocation() {    
+            if(navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(process, positionError);
+            }
+        }
+
+        function process(position){
+          alert("Latitude: " + position.coords.latitude + "<br>Longitude: " + position.coords.longitude);
+
+          // Start fresh
+          var newBounds = L.latLngBounds()
+          cities.clearLayers();
+          $dummyLat = '2.341380';
+          $dummyLong = '99.088434';
+          // 2.341380, 99.088434
+          var myLocation = L.marker([$dummyLat,$dummyLong], {icon: userIcon}).bindPopup('My Location').addTo(cities);
+          newBounds.extend([$dummyLat, $dummyLong]);
+          $.getJSON('homestay/current-location/json', 
+            {
+              current_lat: $dummyLat,
+              current_long: $dummyLong,
+              distance: opt[1]
+            }, 
+            function(data){
+            var marker, popupContent;
+            $.each(data, function(index){
+              var arr = data[index].koordinat_lokasi.split(',');
+              marker = L.marker([arr[0],arr[1]], {icon: homestayIcon}).addTo(cities);
+              var deskripsi = data[index].deskripsi
+              var trimmedString = deskripsi.substr(0, 10);
+              trimmedString = trimmedString.substr(0, Math.min(trimmedString.length, trimmedString.lastIndexOf(" ")))
+              marker.bindPopup(`<div class="card" style="width: 18rem;border:0px;">
+              <img src="storage/`+data[index].foto+`" class="card-img-top" alt="...">
+              <div class="card-body">
+                <h5 class="card-title">`+data[index].nama+`</h5>
+                <p class="card-text">`+trim_words(stripHtml(deskripsi), 15)+`...</p>
+                <a href="/homestay/`+data[index].id+`" class="btn btn-outline-primary">Lihat Detail</a>
+                <a href="https://www.google.com/maps/dir/?api=1&origin=`+$dummyLat+`,`+$dummyLong+`&destination=`+data[index].koordinat_lokasi+`" class="btn btn-outline-primary" target="_blank">Rute</a>
+              </div>
+            </div>`);
+                
+            newBounds.extend([arr[0],arr[1]]);
+            });
+            
+            setTimeout(function () {
+              map.fitBounds(newBounds);
+            }, 1000);
+
+          });
+        }
+
+        function positionError(error) {
+            if(error.PERMISSION_DENIED) alert("Please allow sig homestay website to access your location to use this feature..");
+            return
+            // hideLoadingDiv()
+            // showError('Geolocation is not enabled. Please enable to use this feature')
+        }
+
+        getLocation();
       }
   });
 
   $( document ).ready(function() {
-    // $.getJSON('homestay/json', function(data){
-    //   console.log( "ready!" );
-    //   var marker, popupContent;
-
-    //   if (navigator.geolocation) {
-    //     navigator.geolocation.getCurrentPosition(function(position){
-    //       //   alert("Latitude: " + position.coords.latitude + 
-    //       // "<br>Longitude: " + position.coords.longitude);
-    //       var myLocation = L.marker([position.coords.latitude,position.coords.longitude], {icon: myLocationIcon}).bindPopup('My Location').addTo(cities);
-    //       bounds.extend([position.coords.latitude, position.coords.longitude]);
-    //     });
-    //     } else { 
-    //       alert("Geolocation is not supported by this browser.");
-    //     }
-
-    //   $.each(data, function(index){
-    //     var arr = data[index].koordinat_lokasi.split(',');
-    //     marker = L.marker([arr[0],arr[1]], {icon: greenIcon}).addTo(cities);
-    //     var deskripsi = data[index].deskripsi
-    //     var trimmedString = deskripsi.substr(0, 10);
-    //     trimmedString = trimmedString.substr(0, Math.min(trimmedString.length, trimmedString.lastIndexOf(" ")))
-    //     marker.bindPopup(`<div class="card" style="width: 18rem;border:0px;">
-    //     <img src="storage/`+data[index].foto+`" class="card-img-top" alt="...">
-    //     <div class="card-body">
-    //       <h5 class="card-title">`+data[index].nama+`</h5>
-    //       <p class="card-text">`+trim_words(stripHtml(deskripsi), 15)+`...</p>
-    //       <a href="/homestay/`+data[index].id+`" class="btn btn-outline-primary">Lihat Detail</a>
-    //     </div>
-    //   </div>`);
-          
-    //    bounds.extend([arr[0],arr[1]]);
-
-    //   });
-      
-    //   setTimeout(function () {
-    //     map.fitBounds(bounds);
-    //   }, 1000);
-
-    // });
   });
 
 

@@ -46,6 +46,7 @@ class RegisterController extends Controller
                 'nama_homestay' => $validatedData['nama_homestay'],
                 'status' => 'waiting_for_approval',
                 'pesan' => $validatedData['pesan'],
+                'alasan_penolakan' => "",
             ]);
             \DB::commit();
         }
@@ -53,9 +54,7 @@ class RegisterController extends Controller
             \DB::rollback();
             throw $e;
         }
-        
-        // $request->session()->flash('success', 'Registration successful! Please login');
 
-        return redirect('/login')->with('success', 'Registration successful! Please login');
+        return redirect('/login')->with('success', 'Berhasil daftar akun sebagai pemilik homestay! silahkan masuk');
     }
 }

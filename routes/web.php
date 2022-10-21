@@ -6,7 +6,10 @@ use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\DashboardWisataController;
 use App\Http\Controllers\AdminDesaController;
 use App\Http\Controllers\DashboardHomestayController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\DashboardUserController;
 use App\Http\Controllers\HalamanUtamaController;
+use App\Http\Controllers\PemilikHomestayController;
 use App\Http\Controllers\Wisata as ControllersWisata;
 
 /*
@@ -49,6 +52,7 @@ Route::get('/peta', function () {
 // });
 Route::get('/homestay', [HalamanUtamaController::class, 'homestay']);
 Route::get('/homestay/json', [HalamanUtamaController::class, 'homestayJson']);
+Route::get('/homestay/current-location/json', [HalamanUtamaController::class, 'homestayCurrentLocationJson']);
 Route::get('/homestay/{id}', [HalamanUtamaController::class, 'homestayDetail']);
 
 Route::get('/wisata', [ControllersWisata::class, 'index']);
@@ -68,13 +72,21 @@ Route::post('/login', [LoginController::class, 'login']);
 Route::post('/logout', [LoginController::class, 'logout']);
 Route::get('/register', [RegisterController::class, 'index'])->middleware('guest');
 Route::post('/register', [RegisterController::class, 'register']);
+Route::get('dashboard/pemilik-homestay', [PemilikHomestayController::class, 'index']);
+Route::put('dashboard/pemilik-homestay', [PemilikHomestayController::class, 'update']);
+Route::get('dashboard/user', [DashboardUserController::class, 'index'])->middleware('admin');
+Route::put('dashboard/user/approve/{id}', [DashboardUserController::class, 'approve'])->middleware('admin');
+Route::put('dashboard/user/reject/{id}', [DashboardUserController::class, 'reject'])->middleware('admin');
+Route::get('dashboard/user/{id}', [DashboardUserController::class, 'show'])->middleware('admin');
 
-Route::get('/dashboard', function () {
-    return view('dashboard.index');
-});
+Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('auth');
+
 
 Route::resource('/dashboard/wisata', DashboardWisataController::class)->middleware('auth');
 
 Route::resource('/dashboard/desa', AdminDesaController::class)->except('show')->middleware('admin');
 
-Route::resource('/dashboard/homestay', DashboardHomestayController::class)->middleware('auth');
+Route::get('/dashboard/homestay/json', [DashboardHomestayController::class, 'homestayJson'])->middleware('auth');
+Route::resource('/dashboard/homestay', DashboardHomestayController::class, ['only' => ['index', 'create','store', 'edit', 'update', 'destroy','show']])->middleware('auth');
+Route::resource('/dashboard/homestay', DashboardHomestayController::class, ['except' => ['homestayJson']])->middleware('auth');
+

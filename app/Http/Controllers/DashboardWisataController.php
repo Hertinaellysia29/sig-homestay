@@ -64,7 +64,7 @@ class DashboardWisataController extends Controller
 
         Wisata::create($validatedData);
 
-        return redirect('/dashboard/wisata')->with('success', 'Add Wisata successfull!');
+        return redirect('/dashboard/wisata')->with('success', 'Tambah Wisata berhasil!');
     }
 
     /**
@@ -126,7 +126,7 @@ class DashboardWisataController extends Controller
         Wisata::where('id', $id)
             ->update($validatedData);
 
-        return redirect('/dashboard/wisata')->with('success', 'Wisata has been updated!');
+        return redirect('/dashboard/wisata')->with('success', 'Edit Wisata berhasil!');
     }
 
     /**
@@ -142,6 +142,6 @@ class DashboardWisataController extends Controller
             Storage::delete($data->foto);
         }
         Wisata::destroy($id);
-        return redirect('/dashboard/wisata')->with('success', 'Wisata has been deleted!');
+        return redirect('/dashboard/wisata')->with('success', 'Hapus Wisata berhasil!');
     }
 }

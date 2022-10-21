@@ -81,10 +81,10 @@
                         </div>
                     @enderror
                 </div>
-                <button class="w-100 btn btn-lg btn-primary mt-4" type="submit">Register</button>
+                <button class="w-100 btn btn-lg btn-primary mt-4" type="submit">Daftar</button>
                 </form>
 
-                <small class="d-block text-center mt-3">Already registeered? <a href="/login">Login</a></small>
+                <small class="d-block text-center mt-3">Sudah punya akun? <a href="/login">Masuk</a></small>
             </main>
         </div>
     </div>

@@ -129,7 +129,7 @@
                     </div>
                 @enderror
             </div>
-            <button type="submit" class="btn btn-primary mb-5">Edit Homestay</button>
+            <button type="submit" class="btn btn-primary mb-5"> &nbsp;&nbsp; Edit &nbsp;&nbsp; </button>
         </form>
     </div>
 
