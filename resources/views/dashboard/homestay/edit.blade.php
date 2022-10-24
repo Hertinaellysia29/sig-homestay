@@ -36,7 +36,7 @@
             <div class="row">
                 <div class="col-lg-6">
                     <div class="mb-3">
-                        <label for="harga" class="form-label">Harga</label>
+                        <label for="harga" class="form-label">Harga (*Opsional)</label>
                         <input type="number" class="form-control @error('harga') is-invalid @enderror" id="harga" name="harga" value="{{ old('harga', $data->harga) }}">
                         @error('harga')
                             <div class="invalid-feedback">
@@ -78,7 +78,7 @@
                 @enderror
             </div>
 
-            <div class="mb-3">
+            {{-- <div class="mb-3">
                 <label for="foto" class="form-label">Foto Homestay</label>
                 <input type="hidden" name="oldFoto" value="{{ $data->foto }}">
                 @if ($data->foto)
@@ -92,7 +92,36 @@
                     {{$message}}
                 </div>
             @enderror
-              </div>
+              </div> --}}
+
+            <table class="table table-bordered table-sm" id="dynamicAddRemove">  
+                <tr>
+                    <th><label for="foto" class="form-label">Foto Homestay</label></th>
+                    <th>Aksi</th>
+                </tr>
+                @php
+                    $images = explode("||", $data->foto)
+                @endphp
+                @foreach ($images as $key => $image)
+                    <tr>  
+                        <td>
+                            <input type="hidden" name="oldPhotos[{{$key}}]" value="{{ $image }}">
+                            @if ($data->foto)
+                                <img src="{{ asset('storage/'. $image) }}" class="foto-preview-{{$key}} img-fluid mb-3 col-sm-3 d-block" alt="">
+                            @else
+                                <img class="foto-preview-{{$key}} img-fluid mb-3 col-sm-3">
+                            @endif
+                            <input class="form-control @error('foto') is-invalid @enderror" type="file" id="foto-{{$key}}" name="morePhotos[{{$key}}]" onchange="previewFoto({{$key}})">
+                        </td> 
+                        @if ($key == 0)
+                            <td><button type="button" name="add" id="add-btn" class="btn btn-success btn-sm mt-4">Tambah Foto</button></td>  
+                        @else
+                            <td><button type="button" class="btn btn-danger btn-sm mt-4 remove-tr">Hapus</button></td>
+                        @endif 
+                        
+                    </tr>             
+                @endforeach
+            </table>   
 
             <div class="mb-3">
                 <label for="desa_id" class="form-label">Desa</label>
@@ -130,6 +159,7 @@
                 @enderror
             </div>
             <button type="submit" class="btn btn-primary mb-5"> &nbsp;&nbsp; Edit &nbsp;&nbsp; </button>
+            
         </form>
     </div>
 
@@ -138,9 +168,23 @@
             e.preventDefault();
         })
 
-        function previewFoto(){
-            const foto = document.querySelector('#foto');
-            const fotoPreview = document.querySelector('.foto-preview');
+        // function previewFoto(){
+        //     const foto = document.querySelector('#foto');
+        //     const fotoPreview = document.querySelector('.foto-preview');
+
+        //     fotoPreview.style.display = 'block'
+
+        //     const oFReader = new FileReader();
+        //     oFReader.readAsDataURL(foto.files[0]);
+
+        //     oFReader.onload = function(oFREvent) {
+        //         fotoPreview.src = oFREvent.target.result;
+        //     }
+        // }
+
+        function previewFoto(it){
+            const foto = document.querySelector('#foto-'+it);
+            const fotoPreview = document.querySelector('.foto-preview-'+it);
 
             fotoPreview.style.display = 'block'
 
@@ -151,6 +195,17 @@
                 fotoPreview.src = oFREvent.target.result;
             }
         }
+
+        var i = 0;
+        var data = {!! json_encode($data->foto) !!};
+        i = data.split("||").length - 1;
+        $("#add-btn").click(function(){
+        ++i;
+        $("#dynamicAddRemove").append('<tr><td><img class="foto-preview-'+i+' img-fluid mb-3 col-sm-3"> <input class="form-control @error('foto') is-invalid @enderror" type="file" id="foto-'+i+'" name="morePhotos['+i+']" onchange="previewFoto('+i+')"> @error("morePhotos['+i+']")<div class="invalid-feedback">{{$message}}</div>@enderror</td><td><button type="button" class="btn btn-danger btn-sm mt-4 remove-tr">Hapus</button></td></tr>');
+        });
+        $(document).on('click', '.remove-tr', function(){  
+        $(this).parents('tr').remove();
+        });  
         
     </script>
 @endsection

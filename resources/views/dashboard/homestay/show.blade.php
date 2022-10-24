@@ -4,9 +4,23 @@
 <div class="container mt-5">
     <div class="row mb-5">
       <div class="col-lg-10">
-        <div style="max-height: 350px; overflow:hidden" class="text-center mb-5">
-          {{-- <img src="https://source.unsplash.com/1200x400?tour" alt="" class="img-fluid"> --}}
-          <img src="{{ asset('storage/'. $data->foto) }}" alt="" class="img-fluid">
+        <div style="" class="text-center mb-5">
+          @php
+              $images = explode("||", $data->foto)
+          @endphp
+          <!-- Gallery -->
+          <div class="row">
+            @foreach ($images as $image)
+              <div class="col-md-4 mt-3 col-lg-4">
+                  <img src="{{ asset('storage/'. $image) }}" class="img-fluid" alt="image">
+              </div>
+              @endforeach
+          </div>
+          <!-- Gallery -->
+         
+            {{-- <img src="{{ asset('storage/'. $image) }}" alt="{{$image}}" class="img-fluid"><br> --}}
+          
+          {{-- <img src="{{ asset('storage/'. $data->foto) }}" alt="" class="img-fluid"> --}}
         </div>
         <h2 class="mb-4">{{$data->nama}}</h2>
         <article class="my-3 mb-5">

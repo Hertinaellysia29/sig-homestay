@@ -5,43 +5,43 @@
   <div class="mt-5 mb-5" style="padding-top: 50px">
     <h1 class="line-title">Peta</h1>
   </div>
-<!-- Map -->
-<section class="py-0" id="home-map">
-  <div class="container-fluid">
-    <div class="row">
-      <form action="">
-        @csrf
-        <div class="row">
-          <div class="col-lg-3">
+  <!-- Map -->
+  <section class="py-0" id="home-map">
+    <div class="container-fluid">
+      <div class="row">
+        <form action="">
+          @csrf
+          <div class="row">
+            <div class="col-lg-3">
 
-          </div>
-          <div class="col-lg-6">
-            <div class="row">
-              <div class="col-lg-6">
-                  <select class="form-select" name="" id="source">
-                      <option hidden>Cari Homestay Berdasarkan..</option>
-                      <option value="current_location">Lokasi saat ini</option>
-                      <option value="wisata">Wisata</option>
-                      {{-- @foreach ($category as $item)
-                      <option value="{{ $item->id }}">{{ $item->name }}</option>
-                      @endforeach --}}
-                  </select>
-              </div>
-              <div class="col-lg-6">
-                  <select class="form-select" name="source2" id="source2">
-                    <option hidden>***</option>
-                  </select>
+            </div>
+            <div class="col-lg-6">
+              <div class="row">
+                <div class="col-lg-6">
+                    <select class="form-select" name="" id="source">
+                        <option hidden>Cari Homestay Berdasarkan..</option>
+                        <option value="current_location">Lokasi saat ini</option>
+                        <option value="wisata">Wisata</option>
+                        {{-- @foreach ($category as $item)
+                        <option value="{{ $item->id }}">{{ $item->name }}</option>
+                        @endforeach --}}
+                    </select>
+                </div>
+                <div class="col-lg-6">
+                    <select class="form-select" name="source2" id="source2">
+                      <option hidden>***</option>
+                    </select>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      </form>
+        </form>
+      </div>
+      <div class="container-fluid justify-content-center">
+        <div class="mt-3" id="map" style="width: 100%; height: 600px;"></div>
+      </div>
     </div>
-    <div class="container-fluid justify-content-center">
-      <div class="mt-3 mb-5" id="map" style="width: 100%; height: 700px;"></div>
-    </div>
-  </div>
-</section>
+</div>
 
 <script>
   // form source map
@@ -157,13 +157,14 @@
       console.log( "ready!" );
       var marker, popupContent;
       $.each(data, function(index){
+        var image = data[index].foto.split('||');
         var arr = data[index].koordinat_lokasi.split(',');
         marker = L.marker([arr[0],arr[1]], {icon: homestayIcon}).addTo(cities);
         var deskripsi = data[index].deskripsi
         var trimmedString = deskripsi.substr(0, 10);
         trimmedString = trimmedString.substr(0, Math.min(trimmedString.length, trimmedString.lastIndexOf(" ")))
         marker.bindPopup(`<div class="card" style="width: 18rem;border:0px;">
-        <img src="storage/`+data[index].foto+`" class="card-img-top" alt="...">
+        <img src="storage/`+image[0]+`" class="card-img-top" alt="...">
         <div class="card-body">
           <h5 class="card-title">`+data[index].nama+`</h5>
           <p class="card-text">`+trim_words(stripHtml(deskripsi), 15)+`...</p>
@@ -219,13 +220,14 @@
           console.log( "ready!" );
           var marker, popupContent;
           $.each(data, function(index){
+            var image = data[index].foto.split('||');
             var arr = data[index].koordinat_lokasi.split(',');
             marker = L.marker([arr[0],arr[1]], {icon: homestayIcon}).addTo(cities);
             var deskripsi = data[index].deskripsi
             var trimmedString = deskripsi.substr(0, 10);
             trimmedString = trimmedString.substr(0, Math.min(trimmedString.length, trimmedString.lastIndexOf(" ")))
             marker.bindPopup(`<div class="card" style="width: 18rem;border:0px;">
-            <img src="storage/`+data[index].foto+`" class="card-img-top" alt="...">
+            <img src="storage/`+image[0]+`" class="card-img-top" alt="...">
             <div class="card-body">
               <h5 class="card-title">`+data[index].nama+`</h5>
               <p class="card-text">`+trim_words(stripHtml(deskripsi), 15)+`...</p>
@@ -252,7 +254,7 @@
         }
 
         function process(position){
-          //alert("Latitude: " + position.coords.latitude + "<br>Longitude: " + position.coords.longitude);
+          // alert("Latitude: " + position.coords.latitude + "<br>Longitude: " + position.coords.longitude);
 
           // Start fresh
           var newBounds = L.latLngBounds()
@@ -271,13 +273,14 @@
             function(data){
             var marker, popupContent;
             $.each(data, function(index){
+              var image = data[index].foto.split('||');
               var arr = data[index].koordinat_lokasi.split(',');
               marker = L.marker([arr[0],arr[1]], {icon: homestayIcon}).addTo(cities);
               var deskripsi = data[index].deskripsi
               var trimmedString = deskripsi.substr(0, 10);
               trimmedString = trimmedString.substr(0, Math.min(trimmedString.length, trimmedString.lastIndexOf(" ")))
               marker.bindPopup(`<div class="card" style="width: 18rem;border:0px;">
-              <img src="storage/`+data[index].foto+`" class="card-img-top" alt="...">
+              <img src="storage/`+image[0]+`" class="card-img-top" alt="...">
               <div class="card-body">
                 <h5 class="card-title">`+data[index].nama+`</h5>
                 <p class="card-text">`+trim_words(stripHtml(deskripsi), 15)+`...</p>
@@ -326,5 +329,4 @@
   }
 
 </script>
-
 @endsection
