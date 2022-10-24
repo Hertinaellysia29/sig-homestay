@@ -12,8 +12,8 @@
         </p>
         <div class="mt-5">
           <h2 class="fw-light mb-3">Kontak Kami</h2>
-          <div class="fs-5 mb-2"><i class="bi bi-telephone-fill" style="color: #e1473e"></i> &nbsp;&nbsp; 081323234239</div>
-          <div class="fs-5"><i class="bi bi-envelope-fill" style="color: #e1473e"></i> &nbsp;&nbsp; hertina@gmail.com</div>
+          <div class="fs-5 mb-2"><i class="bi bi-telephone-fill" style="color: #e1473e"></i> &nbsp;&nbsp; 085325285828</div>
+          <div class="fs-5"><i class="bi bi-envelope-fill" style="color: #e1473e"></i> &nbsp;&nbsp; sinurathertina@gmail.com</div>
         </div>
       </div>
     </div>

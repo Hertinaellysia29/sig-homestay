@@ -269,7 +269,7 @@
         }
 
         function process(position){
-          alert("Latitude: " + position.coords.latitude + "<br>Longitude: " + position.coords.longitude);
+          // alert("Latitude: " + position.coords.latitude + "<br>Longitude: " + position.coords.longitude);
 
           // Start fresh
           var newBounds = L.latLngBounds()
@@ -277,7 +277,7 @@
           $dummyLat = '2.341380';
           $dummyLong = '99.088434';
           // 2.341380, 99.088434
-          var myLocation = L.marker([$dummyLat,$dummyLong], {icon: userIcon}).bindPopup('My Location').addTo(cities);
+          var myLocation = L.marker([$dummyLat,$dummyLong], {icon: userIcon}).bindPopup('Lokasi saya').addTo(cities);
           newBounds.extend([$dummyLat, $dummyLong]);
           $.getJSON('homestay/current-location/json', 
             {
