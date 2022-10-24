@@ -154,13 +154,14 @@
           }
   
         $.each(data, function(index){
+          var image = data[index].foto.split('||');
           var arr = data[index].koordinat_lokasi.split(',');
           marker = L.marker([arr[0],arr[1]], {icon: greenIcon}).addTo(cities);
           var deskripsi = data[index].deskripsi
           var trimmedString = deskripsi.substr(0, 10);
           trimmedString = trimmedString.substr(0, Math.min(trimmedString.length, trimmedString.lastIndexOf(" ")))
           marker.bindPopup(`<div class="card" style="width: 18rem;border:0px;">
-          <img src="storage/`+data[index].foto+`" class="card-img-top" alt="...">
+          <img src="storage/`+image[0]+`" class="card-img-top" alt="...">
           <div class="card-body">
             <h5 class="card-title">`+data[index].nama+`</h5>
             <p class="card-text">`+trim_words(stripHtml(deskripsi), 15)+`...</p>

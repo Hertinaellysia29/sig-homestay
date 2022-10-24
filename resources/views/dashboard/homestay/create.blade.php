@@ -34,7 +34,7 @@
             <div class="row">
                 <div class="col-lg-6">
                     <div class="mb-3">
-                        <label for="harga" class="form-label">Harga</label>
+                        <label for="harga" class="form-label">Harga (*Opsional)</label>
                         <input type="number" class="form-control @error('harga') is-invalid @enderror" id="harga" name="harga" value="{{ old('harga') }}">
                         @error('harga')
                             <div class="invalid-feedback">
@@ -67,7 +67,7 @@
                 @enderror
             </div>
 
-            <div class="mb-3">
+            <div class="mb-4">
                 <label for="deskripsi" class="form-label">Deskripsi</label>
                 <input id="deskripsi" type="hidden" name="deskripsi" value="{{ old('deskripsi') }}">
                 <trix-editor input="deskripsi"></trix-editor>
@@ -78,7 +78,7 @@
                 @enderror
             </div>
 
-            <div class="mb-3">
+            {{-- <div class="mb-3">
                 <label for="foto" class="form-label">Foto Homestay</label>
                 <img class="foto-preview img-fluid mb-3 col-sm-5">
                 <input class="form-control @error('foto') is-invalid @enderror" type="file" id="foto" name="foto" onchange="previewFoto()">
@@ -87,7 +87,32 @@
                     {{$message}}
                 </div>
             @enderror
-              </div>
+              </div> --}}
+
+            <table class="table table-bordered table-sm" id="dynamicAddRemove">  
+                <tr>
+                    <th><label for="foto" class="form-label">Foto Homestay</label></th>
+                    <th>Aksi</th>
+                </tr>
+                <tr>  
+                    <td>
+                        {{-- <div class="mb-3"> --}}
+                            <img class="foto-preview-0 img-fluid mb-3 col-sm-5">
+                            <input class="form-control @error('foto') is-invalid @enderror" type="file" id="foto-0" name="morePhotos[0]" onchange="previewFoto(0)">
+                            @if ($errors->any())
+                                @foreach ($errors->all() as $error)
+                                    @if (str_contains($error, 'Foto'))   
+                                        <div class="invalid-feedback" style="display: block;">
+                                            {{ $error }}
+                                        </div>
+                                    @endif
+                                @endforeach
+                            @endif
+                          {{-- </div> --}}
+                    </td>  
+                    <td><button type="button" name="add" id="add-btn" class="btn btn-success btn-sm mt-4">Tambah Foto</button></td>  
+                </tr>  
+            </table>    
               
             <div class="mb-3">
                 <label for="desa_id" class="form-label">Desa</label>
@@ -133,9 +158,9 @@
             e.preventDefault();
         })
 
-        function previewFoto(){
-            const foto = document.querySelector('#foto');
-            const fotoPreview = document.querySelector('.foto-preview');
+        function previewFoto(it){
+            const foto = document.querySelector('#foto-'+it);
+            const fotoPreview = document.querySelector('.foto-preview-'+it);
 
             fotoPreview.style.display = 'block'
 
@@ -147,5 +172,14 @@
             }
         }
         
+        var i = 0;
+        $("#add-btn").click(function(){
+        ++i;
+        $("#dynamicAddRemove").append('<tr><td><img class="foto-preview-'+i+' img-fluid mb-3 col-sm-5"> <input class="form-control @error('foto') is-invalid @enderror" type="file" id="foto-'+i+'" name="morePhotos['+i+']" onchange="previewFoto('+i+')"> @error("morePhotos['+i+']")<div class="invalid-feedback">{{$message}}</div>@enderror</td><td><button type="button" class="btn btn-danger btn-sm mt-4 remove-tr">Hapus</button></td></tr>');
+        });
+        $(document).on('click', '.remove-tr', function(){  
+        $(this).parents('tr').remove();
+        });  
+
     </script>
 @endsection
