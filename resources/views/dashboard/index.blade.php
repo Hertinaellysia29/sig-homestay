@@ -142,20 +142,26 @@
         console.log( "ready!" );
         var marker, popupContent;
   
-        if (navigator.geolocation) {
-          navigator.geolocation.getCurrentPosition(function(position){
-            //   alert("Latitude: " + position.coords.latitude + 
-            // "<br>Longitude: " + position.coords.longitude);
-            var myLocation = L.marker([position.coords.latitude,position.coords.longitude], {icon: myLocationIcon}).bindPopup('My Location').addTo(cities);
-            bounds.extend([position.coords.latitude, position.coords.longitude]);
-          });
-          } else { 
-            alert("Geolocation is not supported by this browser.");
-          }
+        // if (navigator.geolocation) {
+        //   navigator.geolocation.getCurrentPosition(function(position){
+        //     //   alert("Latitude: " + position.coords.latitude + 
+        //     // "<br>Longitude: " + position.coords.longitude);
+        //     var myLocation = L.marker([position.coords.latitude,position.coords.longitude], {icon: myLocationIcon}).bindPopup('My Location').addTo(cities);
+        //     bounds.extend([position.coords.latitude, position.coords.longitude]);
+        //   });
+        //   } else { 
+        //     alert("Geolocation is not supported by this browser.");
+        //   }
   
         $.each(data, function(index){
           var image = data[index].foto.split('||');
           var arr = data[index].koordinat_lokasi.split(',');
+          if (arr.length < 2) {
+            return false;
+          }
+          if (isNaN(arr[0]) || isNaN(arr[1])){
+            return false;
+          }
           marker = L.marker([arr[0],arr[1]], {icon: greenIcon}).addTo(cities);
           var deskripsi = data[index].deskripsi
           var trimmedString = deskripsi.substr(0, 10);

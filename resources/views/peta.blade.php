@@ -159,6 +159,12 @@
       $.each(data, function(index){
         var image = data[index].foto.split('||');
         var arr = data[index].koordinat_lokasi.split(',');
+        if (arr.length < 2) {
+          return false;
+        }
+        if (isNaN(arr[0]) || isNaN(arr[1])){
+          return false;
+        }
         marker = L.marker([arr[0],arr[1]], {icon: homestayIcon}).addTo(cities);
         var deskripsi = data[index].deskripsi
         var trimmedString = deskripsi.substr(0, 10);
@@ -222,6 +228,12 @@
           $.each(data, function(index){
             var image = data[index].foto.split('||');
             var arr = data[index].koordinat_lokasi.split(',');
+            if (arr.length < 2) {
+              return false;
+            }
+            if (isNaN(arr[0]) || isNaN(arr[1])){
+              return false;
+            }
             marker = L.marker([arr[0],arr[1]], {icon: homestayIcon}).addTo(cities);
             var deskripsi = data[index].deskripsi
             var trimmedString = deskripsi.substr(0, 10);
@@ -275,6 +287,12 @@
             $.each(data, function(index){
               var image = data[index].foto.split('||');
               var arr = data[index].koordinat_lokasi.split(',');
+              if (arr.length < 2) {
+                return false;
+              }
+              if (isNaN(arr[0]) || isNaN(arr[1])){
+                return false;
+              }
               marker = L.marker([arr[0],arr[1]], {icon: homestayIcon}).addTo(cities);
               var deskripsi = data[index].deskripsi
               var trimmedString = deskripsi.substr(0, 10);
