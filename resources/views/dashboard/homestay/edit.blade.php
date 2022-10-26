@@ -158,6 +158,8 @@
                     </div>
                 @enderror
             </div>
+            <input type="button" class="btn btn-success mb-5" value="Kembali" onclick="history.go(-1)">
+            {{-- <a href="" class="btn btn-success mb-5" onclick="history.go(-1)"><span data-feather="arrow-left"></span> Kembali </a> --}}
             <button type="submit" class="btn btn-primary mb-5"> &nbsp;&nbsp; Edit &nbsp;&nbsp; </button>
             
         </form>

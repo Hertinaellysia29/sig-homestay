@@ -60,7 +60,7 @@
                 <input class="form-control" id="nama" name="nama" required>
               </div>
               <div style="text-align: center" class="mt-3">
-                <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Batal</button>
+                <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal"> Batal </button>
                 <button type="submit" class="btn btn-primary btn-sm"> Tambah </button>
               </div>
             </form>
@@ -85,8 +85,8 @@
                 <input class="form-control" id="nama" name="nama" required>
               </div>
               <div style="text-align: center" class="mt-3">
-                <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Batal</button>
-                <button type="submit" class="btn btn-primary btn-sm"> Edit </button>
+                <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal"> Batal </button>
+                <button type="submit" class="btn btn-primary btn-sm"> &nbsp;&nbsp; Edit &nbsp;&nbsp; </button>
               </div>
             </form>
           </div>

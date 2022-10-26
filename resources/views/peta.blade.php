@@ -38,7 +38,7 @@
         </form>
       </div>
       <div class="container-fluid justify-content-center">
-        <div class="mt-3" id="map" style="width: 100%; height: 600px;"></div>
+        <div class="mt-3 mb-4" id="map" style="width: 100%; height: 600px;"></div>
       </div>
     </div>
 </div>

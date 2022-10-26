@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
       <div class="col-md-12">
         <h2 class="mb-4">{{$data->nama}}</h2>
-        <article class="my-3 mb-5">
+        <article class="my-3 mb-3">
           {!! $data["deskripsi"] !!}
           <div class="mt-2">
             <b> Fasilitas </b>
@@ -53,7 +53,9 @@
             Koordinat Lokasi: {{$data->koordinat_lokasi}}
           </div>
         </article>
-
+        <form class="mb-3">
+          <input type="button" class="btn btn-success btn-sm" value=" Kembali " onclick="history.go(-1)">
+         </form>
       </div>
     </div>
   </div>

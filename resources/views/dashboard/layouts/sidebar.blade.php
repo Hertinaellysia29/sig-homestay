@@ -42,6 +42,13 @@
               User
             </a>
           </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="/">
+              <span data-feather="arrow-left"></span>
+              Halaman Utama
+            </a>
+          </li>
         </ul>
 
       @else

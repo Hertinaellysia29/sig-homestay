@@ -10,17 +10,17 @@
           <div class="alert alert-warning col-lg" role="alert">
             Registrasi akun anda masih menunggu konfirmasi dari admin
           </div>
-          <a href="/dashboard/homestay/create" class="btn btn-primary mb-4 disabled">Tambah Homestay</a>
+          <a href="/dashboard/homestay/create" class="btn btn-primary mb-4 disabled">Tambah</a>
         @elseif (auth()->user()->pemilik_homestay->status == 'rejected')
           <div class="alert alert-danger col-lg" role="alert">
             Registrasi akun anda ditolak oleh admin, alasan penolakan bisa di lihat pada menu akun
           </div>
-          <a href="/dashboard/homestay/create" class="btn btn-primary mb-4 disabled">Tambah Homestay</a>
+          <a href="/dashboard/homestay/create" class="btn btn-primary mb-4 disabled">Tambah</a>
         @elseif (auth()->user()->pemilik_homestay->status == 'approved')
-          <a href="/dashboard/homestay/create" class="btn btn-primary mb-4">Tambah Homestay</a>
+          <a href="/dashboard/homestay/create" class="btn btn-primary mb-4">Tambah</a>
         @endif
     @else
-      <a href="/dashboard/homestay/create" class="btn btn-primary mb-4 mt-3">Tambah Homestay</a>
+      <a href="/dashboard/homestay/create" class="btn btn-primary mb-4 mt-3">Tambah</a>
     @endif
 
     @if(session()->has('success'))

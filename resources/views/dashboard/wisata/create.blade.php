@@ -2,7 +2,7 @@
 
 @section('container')
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-        <h1 class="h2"> Add Wisata</h1>
+        <h1 class="h2"> Tambah Wisata</h1>
     </div>
     <div class="col-lg-8">
         <form method="post" action="/dashboard/wisata" enctype="multipart/form-data">
@@ -73,7 +73,8 @@
                     </div>
                 @enderror
             </div>
-            <button type="submit" class="btn btn-primary mb-5">Submit</button>
+            <input type="button" class="btn btn-success mb-5" value="Kembali" onclick="history.go(-1)">
+            <button type="submit" class="btn btn-primary mb-5">Tambah</button>
         </form>
     </div>
 

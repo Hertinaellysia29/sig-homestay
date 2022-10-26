@@ -15,7 +15,7 @@
               <th>Pemilik</th>
               <th>No HP</th>
               <th>Desa</th>
-              <th>Action</th>
+              <th>Aksi</th>
           </tr>
       </thead>
       <tbody>

@@ -45,15 +45,20 @@ class DashboardWisataController extends Controller
      */
     public function store(Request $request)
     {   
-        // return $request->file('foto')->store('wisata-foto');
-
         $validatedData = $request->validate([
             'nama' => 'required|max:255',
             'deskripsi' => 'required',
-            'foto' => 'image|file|max:1024',
+            'foto' => 'required|image|file|max:1024',
             'desa_id' => 'required',
             'lokasi' => 'required',
             'koordinat_lokasi' => 'required'
+        ], [
+            'nama.required' => 'Nama tidak boleh kosong.',
+            'deskripsi.required' => 'Deskripsi tidak boleh kosong.',
+            'foto.required' => 'Foto tidak boleh kosong.',
+            'desa_id.required' => 'Desa tidak boleh kosong.',
+            'lokasi.required' => 'Lokasi tidak boleh kosong.',
+            'koordinat_lokasi.required' => 'Koordinat Lokasi tidak boleh kosong.'
         ]);
 
         if($request->file('foto')){
@@ -109,10 +114,17 @@ class DashboardWisataController extends Controller
         $validatedData = $request->validate([
             'nama' => 'required|max:255',
             'deskripsi' => 'required',
-            'foto' => 'image|file|max:1024',
+            // 'foto' => 'required|image|file|max:1024',
             'desa_id' => 'required',
             'lokasi' => 'required',
             'koordinat_lokasi' => 'required'
+        ], [
+            'nama.required' => 'Nama tidak boleh kosong.',
+            'deskripsi.required' => 'Deskripsi tidak boleh kosong.',
+            // 'foto.required' => 'Foto tidak boleh kosong.',
+            'desa_id.required' => 'Desa tidak boleh kosong.',
+            'lokasi.required' => 'Lokasi tidak boleh kosong.',
+            'koordinat_lokasi.required' => 'Koordinat Lokasi tidak boleh kosong.'
         ]);
 
         if($request->file('foto')){

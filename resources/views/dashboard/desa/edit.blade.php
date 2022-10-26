@@ -17,7 +17,8 @@
                     </div>
                 @enderror
             </div>
-            <button type="submit" class="btn btn-primary mb-5">Edit Desa</button>
+            <input type="button" class="btn btn-success mb-5" value="Kembali" onclick="history.go(-1)">
+            <button type="submit" class="btn btn-primary mb-5">&nbsp;&nbsp; Edit &nbsp;&nbsp;</button>
         </form>
     </div>
 
