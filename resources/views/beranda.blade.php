@@ -282,7 +282,7 @@
         }
 
         function process(position){
-          alert("Latitude: " + position.coords.latitude + "<br>Longitude: " + position.coords.longitude);
+          // alert("Latitude: " + position.coords.latitude + "<br>Longitude: " + position.coords.longitude);
 
           // Start fresh
           var newBounds = L.latLngBounds()
