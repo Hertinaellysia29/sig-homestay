@@ -46,13 +46,13 @@
     @endif  
 
     <!-- Map -->
-<section class="mb-5" id="home-map">
+{{-- <section class="mb-5" id="home-map"> --}}
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 mt-5 border-bottom">
         <h3 class="h3"> Peta Homestay </h3>
     </div>
-      <div class="" id="map" style="width: 100%; height: 600px;"></div>
+      <div class="mb-3" id="map" style="width: 100%;height: 600px;position: sticky;"></div>
     </div>
-  </section>
+  {{-- </section> --}}
   
   <script>
     // form source map
