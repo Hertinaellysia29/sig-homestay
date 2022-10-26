@@ -219,6 +219,7 @@
         cities.clearLayers();
 
         $.getJSON('wisata/detail/json/'+opt[1]+'', function(data){
+          originLatLong = data.koordinat_lokasi;
           var marker, popupContent;
           var arr = data.koordinat_lokasi.split(',');
           wisataMarker = L.marker([arr[0],arr[1]], {icon: wisataIcon}).addTo(cities);
@@ -233,8 +234,6 @@
             <a href="/wisata/`+data.id+`" class="btn btn-outline-primary">Lihat Detail</a>
           </div>
           </div>`);
-
-          originLatLong = data.koordinat_lokasi;
 
           newBounds.extend([arr[0],arr[1]]);
         });
