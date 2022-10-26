@@ -24,12 +24,22 @@
                 <form action="/login" method="post">
                     @csrf
                 <div class="form-floating">
-                    <input type="text" name="username" class="form-control rounded-top" id="username" placeholder="Username" autofocus required>
+                    <input type="text" name="username" class="form-control rounded-top" id="username" placeholder="Username" autofocus>
                     <label for="username">Username</label>
+                    @error('username')
+                        <div class="text-danger fs-6 p1">
+                            {{$message}}
+                        </div>
+                    @enderror
                 </div>
                 <div class="form-floating">
-                    <input type="password" name="password" class="form-control rounded-bottom" id="password" placeholder="Password" required>
+                    <input type="password" name="password" class="form-control rounded-bottom" id="password" placeholder="Password">
                     <label for="password">Password</label>
+                    @error('password')
+                        <div class="text-danger fs-6">
+                            {{$message}}
+                        </div>
+                    @enderror
                 </div>
                 <button class="w-100 btn btn-lg btn-primary mt-4" type="submit">Masuk</button>
                 </form>

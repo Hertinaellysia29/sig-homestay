@@ -26,6 +26,15 @@ class RegisterController extends Controller
             'alamat' => 'required',
             'nama_homestay' => 'required',
             'pesan' => 'required'
+        ], [
+            'first_name.required' => 'Nama Depan tidak boleh kosong.',
+            'last_name.required' =>'Nama Belakang tidak boleh kosong.',
+            'username.required' => 'Username tidak boleh kosong.',
+            'password.required' => 'Password tidak boleh kosong.',
+            'no_hp.required' => 'No HP tidak boleh kosong.',
+            'alamat.required' => 'Alamat tidak boleh kosong.',
+            'nama_homestay.required' =>'Nama Homestay tidak boleh kosong.',
+            'pesan.required' => 'Pesan tidak boleh kosong.'
         ]);
 
         \DB::beginTransaction();
