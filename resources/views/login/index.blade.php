@@ -40,10 +40,10 @@
                             {{$message}}
                         </div>
                     @enderror
+                    <small class="d-block mt-3"><a href="/forgot-password">Lupa Password?</a></small>
                 </div>
                 <button class="w-100 btn btn-lg btn-primary mt-4" type="submit">Masuk</button>
                 </form>
-
                 <small class="d-block text-center mt-3">Belum punya akun? <a href="/register">Daftar sekarang!</a></small>
             </main>
         </div>

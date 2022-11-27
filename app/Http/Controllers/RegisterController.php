@@ -22,6 +22,7 @@ class RegisterController extends Controller
             'last_name' => 'required|max:255',
             'username' => ['required', 'min:3', 'max:255', 'unique:users'],
             'password' => 'required|min:5|max:255',
+            'email' => 'required',
             'no_hp' => 'required|min:12|max:13',
             'alamat' => 'required',
             'nama_homestay' => 'required',
@@ -31,6 +32,7 @@ class RegisterController extends Controller
             'last_name.required' =>'Nama Belakang tidak boleh kosong.',
             'username.required' => 'Username tidak boleh kosong.',
             'password.required' => 'Password tidak boleh kosong.',
+            'email.required' => 'Email tidak boleh kosong.',
             'no_hp.required' => 'No HP tidak boleh kosong.',
             'alamat.required' => 'Alamat tidak boleh kosong.',
             'nama_homestay.required' =>'Nama Homestay tidak boleh kosong.',
@@ -42,6 +44,7 @@ class RegisterController extends Controller
 
             $user = User::create([
                 'name' => $validatedData['first_name'] . " " . $validatedData['last_name'],
+                'email' => $validatedData['email'],
                 'username' => $validatedData['username'],
                 'password' => bcrypt($validatedData['password']),
             ]);

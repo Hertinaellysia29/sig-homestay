@@ -10,6 +10,8 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DashboardUserController;
 use App\Http\Controllers\HalamanUtamaController;
 use App\Http\Controllers\PemilikHomestayController;
+use App\Http\Controllers\Auth\PasswordResetLinkController;
+use App\Http\Controllers\Auth\NewPasswordController;
 use App\Http\Controllers\Wisata as ControllersWisata;
 
 /*
@@ -90,3 +92,14 @@ Route::get('/dashboard/homestay/json', [DashboardHomestayController::class, 'hom
 Route::resource('/dashboard/homestay', DashboardHomestayController::class, ['only' => ['index', 'create','store', 'edit', 'update', 'destroy','show']])->middleware('auth');
 Route::resource('/dashboard/homestay', DashboardHomestayController::class, ['except' => ['homestayJson']])->middleware('auth');
 
+Route::get('forgot-password', [PasswordResetLinkController::class, 'create'])
+->name('password.request');
+
+Route::post('forgot-password', [PasswordResetLinkController::class, 'store'])
+->name('password.email');
+
+Route::get('reset-password/{token}', [NewPasswordController::class, 'create'])
+                ->name('password.reset');
+
+Route::post('reset-password', [NewPasswordController::class, 'store'])
+            ->name('password.update');

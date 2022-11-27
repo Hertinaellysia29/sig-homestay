@@ -45,6 +45,15 @@
                     @enderror
                 </div>
                 <div class="form-floating">
+                    <input type="email" name="email" class="form-control @error('email') is-invalid @enderror" id="email" placeholder="Email (Opsional)">
+                    <label for="email">Email (Opsional)</label>
+                    @error('email')
+                        <div class="invalid-feedback">
+                            {{$message}}
+                        </div>
+                    @enderror
+                </div>
+                <div class="form-floating">
                     <input type="text" name="no_hp" class="form-control @error('no_hp') is-invalid @enderror" id="no_hp" placeholder="Nomor HP" value="{{ old('no_hp') }}">
                     <label for="no_hp">Nomor HP</label>
                     @error('no_hp')
